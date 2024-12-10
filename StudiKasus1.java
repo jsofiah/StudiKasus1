@@ -12,7 +12,7 @@ public class StudiKasus1 {
     static void tambahData(){
         Scanner kel4 = new Scanner(System.in);
         String tambahData;
-        // int indexMatkul = 0;
+        int indexMatkul = 0;
         
         System.out.println("=======Tambah Data KRS=======");
         System.out.print("Nama Mahasiswa: ");
@@ -41,6 +41,8 @@ public class StudiKasus1 {
                             System.out.println("SKS akan melebihi batas maximum. Silakan masukkan lagi");
                         }
                         else{
+                            nim[indexMahasiswa][indexMatkul] = nim[indexMahasiswa][0];
+                            namaMahasiswa[indexMahasiswa][indexMatkul] = namaMahasiswa[indexMahasiswa][0];
                             totalSks[indexMahasiswa] += sks[indexMahasiswa][indexMatkul];
                             indexMatkul++;
                             break;
@@ -48,12 +50,7 @@ public class StudiKasus1 {
                     }
                     else{
                         System.out.println("Jumlah SKS harus antara 1-3. Silakan masukkan lagi");
-                        // System.out.print("Kode Mata Kuliah: ");
-                        // kodeMatKul[indexMatkul] = kel4.nextLine();
-                        // System.out.print("Nama Mata Kuliah: ");
-                        // namaMatKul[indexMatkul] = kel4.nextLine();
-                }
-
+                    }
                 }
             System.out.print("Tambah mata kuliah lain? (y/t): ");
             tambahData = kel4.nextLine();
@@ -73,10 +70,10 @@ public class StudiKasus1 {
             for (int j = 0; j < 24; j++) {
                 if(nim[i][j]== nimKey){
                     temukan = true;
-                    System.out.printf("%-10s %-10s %-10s %-30s %-3s\n", "NIM", "Nama", "Kode MK", "Nama Mata Kuliah", "SKS");
+                    System.out.printf("%-10s %-10s %-10s %-25s %-3s\n", "NIM", "Nama", "Kode MK", "Nama Mata Kuliah", "SKS");
                     for (int k = 0; k < 24; k++) {
                         if (kodeMatKul[i][k] != null) {
-                            System.out.printf("%-10d %-10s %-10s %-30s %-3d\n",
+                            System.out.printf("%-10d %-10s %-10s %-25s %-3d\n",
                                     nim[i][k], namaMahasiswa[i][k], kodeMatKul[i][k], namaMatKul[i][k], sks[i][k]);
                         }
                     }
@@ -88,6 +85,16 @@ public class StudiKasus1 {
         if (temukan == false) {
             System.out.print("Data tidak ditemukan untuk NIM: " + nimKey);
         }
+    }
+    static void analisisData() {
+        int jumlahMahasiswa = 0;
+        for (int i = 0; i < indexMahasiswa; i++) {
+            if (totalSks[i] < 20) {
+                jumlahMahasiswa++;
+            }
+        }
+        System.out.println("\n=====Analisis Data KRS=====");
+        System.out.println("Jumlah mahasiswa yang mengambil SKS kurang dari 20: " + jumlahMahasiswa);
     }
     public static void main(String[] args) {
         Scanner kel4 = new Scanner(System.in);
@@ -109,9 +116,10 @@ public class StudiKasus1 {
                 tampilkanData();
             }
             else if (menu == 3) {
-                
+                analisisData();
             }
             else if(menu == 4){
+                System.out.println("Terima kasih!");
                 break;
             }
             else{
