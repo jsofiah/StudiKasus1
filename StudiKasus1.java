@@ -43,6 +43,7 @@ public class StudiKasus1 {
                         else{
                             nim[indexMahasiswa][indexMatkul] = nim[indexMahasiswa][0];
                             namaMahasiswa[indexMahasiswa][indexMatkul] = namaMahasiswa[indexMahasiswa][0];
+                            System.out.println("Data mata kuliah berhasil ditambahkan");
                             totalSks[indexMahasiswa] += sks[indexMahasiswa][indexMatkul];
                             indexMatkul++;
                             break;
